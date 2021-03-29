@@ -7,22 +7,18 @@ const Header = () => {
     <div>
       <Navbar bg='dark' variant='dark' collapseOnSelect>
         <Container>
-          <LinkContainer to='/'>
-            <Navbar.Brand>ProShop</Navbar.Brand>
-          </LinkContainer>
+          <Navbar.Brand as={Link} to='/'>
+            ProShop
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic=navbar-nav'>
             <Nav className='ml-auto'>
-              <LinkContainer to='/cart'>
-                <Nav.Link>
-                  <i class='fas fa-shopping-cart'></i> Cart
-                </Nav.Link>
-              </LinkContainer>
-              <LinkContainer to='/login'>
-                <Nav.Link>
-                  <i class='fas fa-user'></i> Sign In
-                </Nav.Link>
-              </LinkContainer>
+              <Nav.Link as={Link} to='/cart'>
+                <i class='fas fa-shopping-cart'></i> Cart
+              </Nav.Link>
+              <Nav.Link as={Link} to='/login'>
+                <i class='fas fa-user'></i> Sign In
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
