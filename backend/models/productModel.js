@@ -34,12 +34,12 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    reviews: [reviewSchema],
     description: {
-      type: Boolean,
+      type: String,
       required: true,
       default: false,
     },
+    reviews: [reviewSchema],
     rating: {
       type: Number,
       required: true,
