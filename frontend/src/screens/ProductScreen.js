@@ -67,28 +67,29 @@ const ProductScreen = ({ match }) => {
                     <Col>
                       {product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}
                     </Col>
-                    {product.countInStock > 0 && (
-                      <ListGroup.Item>
-                        <Row>
-                          <Col>Qty</Col>
-                          <Col>
-                            <Form.Control
-                              as='select'
-                              value={qty}
-                              onChange={(e) => setQty(e.target.value)}>
-                              {[...Array(product.countInStock).keys()].map(
-                                (x) => (
-                                  <option key={x + 1} value={x + 1}>
-                                    {x + 1}
-                                  </option>
-                                )
-                              )}
-                            </Form.Control>
-                          </Col>
-                        </Row>
-                      </ListGroup.Item>
-                    )}
                   </Row>
+                  {product.countInStock > 0 && (
+                    <ListGroup.Item>
+                      <Row>
+                        <Col>Qty</Col>
+                        <Col>
+                          <Form.Control
+                            style={{ padding: '0.5rem', minWidth: '3rem' }}
+                            as='select'
+                            value={qty}
+                            onChange={(e) => setQty(e.target.value)}>
+                            {[...Array(product.countInStock).keys()].map(
+                              (x) => (
+                                <option key={x + 1} value={x + 1}>
+                                  {x + 1}
+                                </option>
+                              )
+                            )}
+                          </Form.Control>
+                        </Col>
+                      </Row>
+                    </ListGroup.Item>
+                  )}
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Button
