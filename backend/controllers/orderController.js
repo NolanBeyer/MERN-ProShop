@@ -1,5 +1,4 @@
 import asyncHandler from 'express-async-handler'
-import { updateUserProfile } from '../../frontend/src/actions/userActions.js'
 import Order from '../models/orderModel.js'
 
 // @desc  Create new order
