@@ -1,4 +1,5 @@
 import asyncHandler from 'express-async-handler'
+import { updateUserProfile } from '../../frontend/src/actions/userActions.js'
 import Order from '../models/orderModel.js'
 
 // @desc  Create new order
@@ -54,4 +55,29 @@ const getOrderById = asyncHandler(async (req, res) => {
   }
 })
 
-export { addOrderItems, getOrderById }
+// @desc  Update order to paid
+// @route  Get /api/orders/:id/pay
+// @access  Private
+
+const updateOrderToPaid = asyncHandler(async (req, res) => {
+  const order = await await Order.findById(req.params.id)
+
+  if (order) {
+    order.isPaid = true
+    order.paidAt = Date.now()
+    order.payment.result = {
+      id: req.body.id,
+      status: req.body.status,
+      update_time: req.body.update_time,
+      email: req.body.payer.emailAddress,
+    }
+
+    const updateOrder = await order.save()
+    res.json(updateOrder)
+  } else {
+    res.status(404)
+    throw new Error('Order not found')
+  }
+})
+
+export { addOrderItems, getOrderById, updateOrderToPaid }
