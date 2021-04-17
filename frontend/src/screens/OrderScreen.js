@@ -9,7 +9,7 @@ import { getOrderDetails, payOrder } from '../actions/orderActions'
 import { PayPalButton } from 'react-paypal-button-v2'
 import { ORDER_PAY_RESET } from '../constants/ordersConstants'
 
-const OrderScreen = ({ match }) => {
+const OrderScreen = ({ match, history }) => {
   const [sdkReady, setSdkReady] = useState(false)
   const orderId = match.params.id
 
@@ -36,19 +36,19 @@ const OrderScreen = ({ match }) => {
       const { data: clientId } = await axios.get('/api/config/paypal')
       const script = document.createElement('script')
       script.type = 'text/javascript'
-      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}&components=YOUR_COMPONENTS`
+      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`
       script.async = true
-      script.onLoad = () => {
-        sdkReady(true)
+      script.onload = () => {
+        setSdkReady(true)
       }
-      document.body.appendBody(script)
+      document.body.appendChild(script)
     }
 
-    if (!order || successPay) {
+    if (!order || successPay || order._id !== orderId) {
       dispatch({ type: ORDER_PAY_RESET })
       dispatch(getOrderDetails(orderId))
     } else if (!order.isPaid) {
-      if (window.papal) {
+      if (!window.paypal) {
         addPayPalScript()
       } else {
         setSdkReady(true)
