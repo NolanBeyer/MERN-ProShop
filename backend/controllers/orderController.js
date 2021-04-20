@@ -41,7 +41,7 @@ const addOrderItems = asyncHandler(async (req, res) => {
 // @access  Private
 
 const getOrderById = asyncHandler(async (req, res) => {
-  const order = await await Order.findById(req.params.id).populate(
+  const order = await Order.findById(req.params.id).populate(
     'user',
     'name email'
   )
@@ -64,7 +64,7 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
   if (order) {
     order.isPaid = true
     order.paidAt = Date.now()
-    order.payment.result = {
+    order.paymentResult = {
       id: req.body.id,
       status: req.body.status,
       update_time: req.body.update_time,
