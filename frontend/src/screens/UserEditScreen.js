@@ -70,6 +70,7 @@ const UserEditScreen = ({ match, history }) => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}></FormControl>
             </Form.Group>
+
             <Form.Group controlId='email'>
               <Form.Label>Email Address</Form.Label>
               <FormControl
