@@ -50,8 +50,6 @@ const ProductScreen = ({ match, history }) => {
     dispatch(createProductReview(match.params.id, { rating, comment }))
   }
 
-  if (!product) return null
-
   return (
     <>
       <Link className='btn btn-light my-3' to='/'>
