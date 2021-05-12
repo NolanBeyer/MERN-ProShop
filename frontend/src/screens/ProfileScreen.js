@@ -5,9 +5,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { Form } from 'react-bootstrap'
-import { getUserDetails } from '../actions/userActions'
+import { getUserDetails, updateUserProfile } from '../actions/userActions'
 import { userUpdateProfileReducer } from '../reducers/userReducers'
 import { listMyOrders } from '../actions/orderActions'
+import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'
 
 const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState('')
@@ -34,7 +35,8 @@ const ProfileScreen = ({ location, history }) => {
     if (!userInfo) {
       history.push('/login')
     } else {
-      if (!user || !user.name) {
+      if (!user || !user.name || success) {
+        dispatch({ type: USER_UPDATE_PROFILE_RESET })
         dispatch(getUserDetails('profile'))
         dispatch(listMyOrders())
       } else {
@@ -51,8 +53,8 @@ const ProfileScreen = ({ location, history }) => {
     } else {
       dispatch(updateUserProfile({ id: user._id, name, email, password }))
     }
-    // Dispatch Login
   }
+
   return (
     <Row>
       <Col md={3}>
