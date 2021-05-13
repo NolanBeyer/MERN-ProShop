@@ -6,7 +6,7 @@ import Product from '../models/productModel.js'
 // @access  Public
 
 const getProducts = asyncHandler(async (req, res) => {
-  const pageSize = 2
+  const pageSize = 4
   const page = Number(req.query.pageNumber) || 1
   const keyword = req.query.keyword
     ? {
@@ -79,15 +79,8 @@ const createProduct = asyncHandler(async (req, res) => {
 //* @access  Private Admin
 
 const updateProduct = asyncHandler(async (req, res) => {
-  const {
-    name,
-    price,
-    description,
-    image,
-    brand,
-    category,
-    countInStock,
-  } = req.body
+  const { name, price, description, image, brand, category, countInStock } =
+    req.body
 
   const product = await Product.findById(req.params.id)
   if (product) {

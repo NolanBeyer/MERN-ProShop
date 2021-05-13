@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import { Row, Button, Col, Table } from 'react-bootstrap'
+import React, { useState, useEffect } from 'react'
+import { Table, Form, Button, Row, Col } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { Form } from 'react-bootstrap'
 import { getUserDetails, updateUserProfile } from '../actions/userActions'
-import { userUpdateProfileReducer } from '../reducers/userReducers'
 import { listMyOrders } from '../actions/orderActions'
 import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'
 
 const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState('')
-  const [email, setEmail] = useState(' ')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [message, setMessage] = useState(null)
@@ -25,8 +23,8 @@ const ProfileScreen = ({ location, history }) => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
-  const updateUserProfile = useSelector((state) => state.userUpdateProfile)
-  const { success } = userUpdateProfileReducer
+  const userUpdateProfile = useSelector((state) => state.userUpdateProfile)
+  const { success } = userUpdateProfile
 
   const orderListMy = useSelector((state) => state.orderListMy)
   const { loading: loadingOrders, error: errorOrders, orders } = orderListMy
